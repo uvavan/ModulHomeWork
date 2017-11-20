@@ -32,6 +32,21 @@ final class DataManager {
                                     email: "ArehK@mail.ru", telephone: "+380978678958"))
     }
     
+    func delContac(_ contact: ContactUser) {
+        guard !contacts.isEmpty else {return}
+        guard let index = getIndex(of: contact) else {return}
+        contacts.remove(at: index)
+        NotificationCenter.default.post(name: .ContactDeleted, object: nil)
+    }
     
-    
+    func getIndex(of contact: ContactUser) -> Int? {
+        var indexOfContact: Int?
+        for (index,item) in contacts.enumerated() {
+            if item.telephone == contact.telephone {
+                indexOfContact = index
+                break
+            }
+        }
+        return indexOfContact
+    }
 }

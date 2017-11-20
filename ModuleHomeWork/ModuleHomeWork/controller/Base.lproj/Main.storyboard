@@ -67,7 +67,13 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <navigationItem key="navigationItem" id="qn2-dB-gf9"/>
+                    <navigationItem key="navigationItem" id="qn2-dB-gf9">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="Ya6-w9-VFw">
+                            <connections>
+                                <action selector="buttonPressAddContact:" destination="BYZ-38-t0r" id="Jc3-kn-eOt"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="ibContactTableView" destination="5Sn-vo-xKq" id="35W-06-tfK"/>
                         <segue destination="SS7-iZ-Ulo" kind="show" identifier="showContact" id="f7e-NJ-Ywc"/>
@@ -141,7 +147,7 @@
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6cA-G1-L2K">
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6cA-G1-L2K">
                                                 <rect key="frame" x="0.0" y="25.5" width="255" height="23.5"/>
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -182,6 +188,13 @@
                     <navigationItem key="navigationItem" id="sBw-nA-m0A">
                         <barButtonItem key="rightBarButtonItem" title="Сохранить" id="Ay1-a6-BOl"/>
                     </navigationItem>
+                    <connections>
+                        <outlet property="ibButtonSave" destination="Ay1-a6-BOl" id="75X-IY-edY"/>
+                        <outlet property="ibEmailTextField" destination="Vct-KD-ooc" id="9GB-Tc-FH8"/>
+                        <outlet property="ibNameTextField" destination="5Dk-jB-m2g" id="ypc-Ik-t7h"/>
+                        <outlet property="ibSurnameTextField" destination="6cA-G1-L2K" id="UdZ-yn-TMG"/>
+                        <outlet property="ibTelephoneTextField" destination="cVx-zT-ZYU" id="eDS-dM-uaz"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="v0S-Fx-d5u" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

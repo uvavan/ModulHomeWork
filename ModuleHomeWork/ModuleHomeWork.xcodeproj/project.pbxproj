@@ -17,6 +17,7 @@
 		846483631FBC2483008D41E5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 846483611FBC2483008D41E5 /* Main.storyboard */; };
 		846483651FBC2483008D41E5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 846483641FBC2483008D41E5 /* Assets.xcassets */; };
 		846483681FBC2483008D41E5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 846483661FBC2483008D41E5 /* LaunchScreen.storyboard */; };
+		84DB2AD01FC32EA2001C4F8E /* Notification+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DB2ACF1FC32EA2001C4F8E /* Notification+Extension.swift */; };
 		EDF679DE30F9ACE7335700C5 /* Pods_ModuleHomeWork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29AC307458FDAD758F4D730A /* Pods_ModuleHomeWork.framework */; };
 /* End PBXBuildFile section */
 
@@ -35,6 +36,7 @@
 		846483641FBC2483008D41E5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		846483671FBC2483008D41E5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		846483691FBC2483008D41E5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		84DB2ACF1FC32EA2001C4F8E /* Notification+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification+Extension.swift"; sourceTree = "<group>"; };
 		D6509505706001110585FEBC /* Pods-ModuleHomeWork.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ModuleHomeWork.release.xcconfig"; path = "Pods/Target Support Files/Pods-ModuleHomeWork/Pods-ModuleHomeWork.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -119,12 +121,21 @@
 		8464835C1FBC2483008D41E5 /* ModuleHomeWork */ = {
 			isa = PBXGroup;
 			children = (
+				84DB2ACE1FC32E4F001C4F8E /* Extension */,
 				845725891FBC30A300C98C74 /* view */,
 				845725881FBC309700C98C74 /* controller */,
 				845725871FBC308D00C98C74 /* model */,
 				8457258B1FBC30D400C98C74 /* help */,
 			);
 			path = ModuleHomeWork;
+			sourceTree = "<group>";
+		};
+		84DB2ACE1FC32E4F001C4F8E /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				84DB2ACF1FC32EA2001C4F8E /* Notification+Extension.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 		A0F1FEFDB06017C3322459A4 /* Frameworks */ = {
@@ -281,6 +292,7 @@
 				845725991FBC3C6500C98C74 /* ContactUser.swift in Sources */,
 				845725971FBC3A6000C98C74 /* DataManager.swift in Sources */,
 				846483601FBC2483008D41E5 /* TabelViewController.swift in Sources */,
+				84DB2AD01FC32EA2001C4F8E /* Notification+Extension.swift in Sources */,
 				8457258D1FBC34CB00C98C74 /* EditingViewController.swift in Sources */,
 				8464835E1FBC2483008D41E5 /* AppDelegate.swift in Sources */,
 			);

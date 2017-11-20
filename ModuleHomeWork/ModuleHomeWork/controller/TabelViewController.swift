@@ -10,7 +10,7 @@ import UIKit
 
 class TabelViewController: UIViewController {
     
-    @IBOutlet weak var ibContactTableView: UITableView!
+    @IBOutlet  weak private var ibContactTableView: UITableView!
     private var datasource: [Character : [ContactUser]] = [:]
     private var keyCharacter: [Character] = []
     
@@ -19,6 +19,11 @@ class TabelViewController: UIViewController {
         self.title = "Контакты"
         setupDatasource()
         setupTable()
+        addNotification()
+    }
+    
+    private func addNotification () {
+        NotificationCenter.default.addObserver(self, selector: #selector(delContact), name: .ContactDeleted, object: nil)
     }
     
     private func setupTable(){
@@ -36,6 +41,8 @@ class TabelViewController: UIViewController {
     
     private func setupDatasource() {
         let contacts = DataManager.instance.contacts
+        datasource = [:]
+        keyCharacter = []
         for contact in contacts {
             if let firstChart = contact.surname.first {
                 var newContacts = datasource[firstChart] ?? []
@@ -47,12 +54,16 @@ class TabelViewController: UIViewController {
         ibContactTableView.reloadData()
     }
     
+    @IBAction  private func buttonPressAddContact(_ sender: Any) {
+        performSegue(withIdentifier: "showContact", sender: nil)
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let destVC = segue.destination as? EditingViewController else {return}
         guard let indexPath = sender as? IndexPath else {return}
         destVC.contact = getContact(for: indexPath)
     }
-
+    
 }
 
 // MARK: - Table view datasource
@@ -87,8 +98,22 @@ extension TabelViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 60
     }
-
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         performSegue(withIdentifier: "showContact", sender: indexPath)
+    }
+    
+    func tableView(_ tableView: UITableView,
+                   commit editingStyle: UITableViewCellEditingStyle,
+                   forRowAt indexPath: IndexPath) {
+        guard editingStyle == .delete else {return}
+        guard let contact = getContact(for: indexPath) else {return}
+        DataManager.instance.delContac(contact)
+    }
+}
+
+extension TabelViewController {
+    @objc private func delContact () {
+        setupDatasource()
     }
 }
