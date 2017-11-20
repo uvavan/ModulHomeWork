@@ -9,11 +9,12 @@
 import UIKit
 
 class EditingViewController: UIViewController {
+    
+    var contact: ContactUser?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        title = contact != nil ? "Редактировать" : "Создать"
     }
 
 }

@@ -46,11 +46,18 @@ class TabelViewController: UIViewController {
         keyCharacter = Array(datasource.keys).sorted()
         ibContactTableView.reloadData()
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let destVC = segue.destination as? EditingViewController else {return}
+        guard let indexPath = sender as? IndexPath else {return}
+        destVC.contact = getContact(for: indexPath)
+    }
 
 }
 
 // MARK: - Table view datasource
 extension TabelViewController: UITableViewDelegate, UITableViewDataSource {
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return keyCharacter.count
     }
@@ -78,7 +85,10 @@ extension TabelViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 120
+        return 60
     }
 
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "showContact", sender: indexPath)
+    }
 }
