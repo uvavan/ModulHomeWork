@@ -23,6 +23,21 @@ class EditingViewController: UIViewController {
         super.viewDidLoad()
         isAddContact = contact != nil ? true : false
         setupViewController()
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapRecognized(_:)))
+        ibImageContact.addGestureRecognizer(tapGesture)
+    }
+    
+    @objc private func tapRecognized(_ sender: UITapGestureRecognizer) {
+        let alertVC = UIAlertController(title: "Выберите источник", message: nil, preferredStyle: .actionSheet)
+        let cameraAction = UIAlertAction(title: "Камера", style: .default) { _ in
+        }
+        let galleryAction = UIAlertAction(title: "Галерея", style: .default) {_ in
+        }
+        let canceledAction = UIAlertAction(title: "Отмена", style: .cancel, handler: nil)
+        alertVC.addAction(cameraAction)
+        alertVC.addAction(galleryAction)
+        alertVC.addAction(canceledAction)
+        self.present(alertVC, animated: true, completion: nil)
     }
     
     private func setupViewController() {
