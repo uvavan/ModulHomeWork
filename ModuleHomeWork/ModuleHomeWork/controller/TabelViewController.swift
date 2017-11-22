@@ -21,9 +21,11 @@ class TabelViewController: UIViewController {
         setupTable()
         addNotification()
     }
-    
+
     private func addNotification () {
         NotificationCenter.default.addObserver(self, selector: #selector(delContact), name: .ContactDeleted, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(addContact), name: .ContactAdd, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(editingContact), name: .ContactEditing, object: nil)
     }
     
     private func setupTable(){
@@ -96,7 +98,7 @@ extension TabelViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 60
+        return 70
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -114,6 +116,14 @@ extension TabelViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension TabelViewController {
     @objc private func delContact () {
+        setupDatasource()
+    }
+    
+    @objc private func addContact() {
+        setupDatasource()
+    }
+    
+    @objc private func editingContact() {
         setupDatasource()
     }
 }

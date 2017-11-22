@@ -186,11 +186,16 @@
                         <viewLayoutGuide key="safeArea" id="zZm-VX-0eO"/>
                     </view>
                     <navigationItem key="navigationItem" id="sBw-nA-m0A">
-                        <barButtonItem key="rightBarButtonItem" title="Сохранить" id="Ay1-a6-BOl"/>
+                        <barButtonItem key="rightBarButtonItem" title="Сохранить" id="Ay1-a6-BOl">
+                            <connections>
+                                <action selector="ibButtonSave:" destination="SS7-iZ-Ulo" id="L9g-TC-68M"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="ibButtonSave" destination="Ay1-a6-BOl" id="75X-IY-edY"/>
                         <outlet property="ibEmailTextField" destination="Vct-KD-ooc" id="9GB-Tc-FH8"/>
+                        <outlet property="ibImageContact" destination="zTy-pe-9CM" id="spf-7y-zg7"/>
                         <outlet property="ibNameTextField" destination="5Dk-jB-m2g" id="ypc-Ik-t7h"/>
                         <outlet property="ibSurnameTextField" destination="6cA-G1-L2K" id="UdZ-yn-TMG"/>
                         <outlet property="ibTelephoneTextField" destination="cVx-zT-ZYU" id="eDS-dM-uaz"/>

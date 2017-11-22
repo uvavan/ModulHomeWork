@@ -10,4 +10,6 @@ import Foundation
 
 extension Notification.Name {
     static let ContactDeleted = Notification.Name("ContactDeleted")
+    static let ContactAdd = Notification.Name("ContactAdd")
+    static let ContactEditing = Notification.Name("ContactEditing")
 }

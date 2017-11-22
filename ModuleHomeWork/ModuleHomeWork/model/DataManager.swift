@@ -39,10 +39,26 @@ final class DataManager {
         NotificationCenter.default.post(name: .ContactDeleted, object: nil)
     }
     
+    func addContact (_ contact: ContactUser) {
+        contacts.append(contact)
+        NotificationCenter.default.post(name: .ContactAdd, object: nil)
+    }
+    
+    func editingContact(_ contact: ContactUser) {
+        guard !contacts.isEmpty else {return}
+        guard let index = getIndex(of: contact) else {return}
+        contacts[index].name = contact.name
+        contacts[index].surname = contact.surname
+        contacts[index].email = contact.email
+        contacts[index].telephone = contact.telephone
+        contacts[index].icon = contact.icon
+        NotificationCenter.default.post(name: .ContactEditing, object: nil)
+    }
+    
     func getIndex(of contact: ContactUser) -> Int? {
         var indexOfContact: Int?
         for (index,item) in contacts.enumerated() {
-            if item.telephone == contact.telephone {
+            if item.id == contact.id {
                 indexOfContact = index
                 break
             }
