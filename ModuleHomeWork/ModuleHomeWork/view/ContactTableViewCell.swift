@@ -22,9 +22,9 @@ class ContactTableViewCell: UITableViewCell {
         selectionStyle = .none
     }
     
-    func update (name: String, surname: String, telephone: String, icon: UIImage) {
+    func update (fullName: String, telephone: String, icon: UIImage) {
         ibImage.image = icon
-        ibLabelFullName.text = surname + " " + name
+        ibLabelFullName.text = fullName
         ibLabelTelephone.text = telephone
     }
     

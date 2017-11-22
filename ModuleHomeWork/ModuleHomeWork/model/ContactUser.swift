@@ -15,6 +15,7 @@ class ContactUser {
     var surname: String = ""
     var email: String = ""
     var telephone: String = ""
+    var fullName: String = ""
     var icon: UIImage! = nil
     
     init(name: String, surname: String, email: String, telephone: String, _ icon: UIImage! = nil) {
@@ -25,5 +26,6 @@ class ContactUser {
         self.email = email
         self.telephone = telephone
         self.icon = icon
+        self.fullName = "\(self.name) \(self.surname)"
     }
 }

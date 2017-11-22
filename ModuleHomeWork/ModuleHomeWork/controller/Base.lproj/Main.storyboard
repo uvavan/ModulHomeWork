@@ -76,6 +76,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="ibContactTableView" destination="5Sn-vo-xKq" id="35W-06-tfK"/>
+                        <outlet property="ibSearch" destination="GmW-NW-A7M" id="UqI-RU-kJJ"/>
                         <segue destination="SS7-iZ-Ulo" kind="show" identifier="showContact" id="f7e-NJ-Ywc"/>
                     </connections>
                 </viewController>

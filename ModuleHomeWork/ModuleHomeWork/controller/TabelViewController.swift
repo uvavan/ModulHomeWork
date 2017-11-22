@@ -10,13 +10,17 @@ import UIKit
 
 class TabelViewController: UIViewController {
     
-    @IBOutlet  weak private var ibContactTableView: UITableView!
+    @IBOutlet private weak var ibSearch: UISearchBar!
+    @IBOutlet private weak var ibContactTableView: UITableView!
     private var datasource: [Character : [ContactUser]] = [:]
     private var keyCharacter: [Character] = []
+    private var isSearchActive = false
+    private var filteredData: [ContactUser] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Контакты"
+        ibSearch.delegate = self
         setupDatasource()
         setupTable()
         addNotification()
@@ -38,7 +42,7 @@ class TabelViewController: UIViewController {
     private func getContact(for indexPath: IndexPath) -> ContactUser? {
         let key = keyCharacter[indexPath.section]
         let contactsForSection = datasource[key]
-        return contactsForSection?[indexPath.row]
+        return isSearchActive ? filteredData[indexPath.row] : contactsForSection?[indexPath.row]
     }
     
     private func setupDatasource() {
@@ -46,7 +50,7 @@ class TabelViewController: UIViewController {
         datasource = [:]
         keyCharacter = []
         for contact in contacts {
-            if let firstChart = contact.surname.first {
+            if let firstChart = contact.name.first {
                 var newContacts = datasource[firstChart] ?? []
                 newContacts.append(contact)
                 datasource[firstChart] = newContacts
@@ -56,7 +60,20 @@ class TabelViewController: UIViewController {
         ibContactTableView.reloadData()
     }
     
-    @IBAction  private func buttonPressAddContact(_ sender: Any) {
+    private func filterContent(byName name: String) {
+        let contacts = DataManager.instance.contacts
+        isSearchActive = !name.isEmpty
+        filteredData.removeAll()
+        for contact in contacts {
+            if contact.fullName.lowercased().contains(name.lowercased()) {
+                filteredData.append(contact)
+            }
+        }
+        ibContactTableView.reloadData()
+        //ibContactTableView.reloadSections(IndexSet(integer: 0), with: .none)
+    }
+    
+    @IBAction private func buttonPressAddContact(_ sender: Any) {
         performSegue(withIdentifier: "showContact", sender: nil)
     }
     
@@ -72,7 +89,7 @@ class TabelViewController: UIViewController {
 extension TabelViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return keyCharacter.count
+        return isSearchActive ? 1 : keyCharacter.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -84,17 +101,17 @@ extension TabelViewController: UITableViewDelegate, UITableViewDataSource {
             fatalError("Error: Error inex Path")
         }
         let iconImage = item.icon ?? #imageLiteral(resourceName: "user-6")
-        cell.update(name: item.name, surname: item.surname, telephone: item.telephone, icon: iconImage)
+        cell.update(fullName: item.fullName, telephone: item.telephone, icon: iconImage)
         return cell
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let key = keyCharacter[section]
         let contactsForSection = datasource[key] ?? []
-        return contactsForSection.count
+        return  isSearchActive ? filteredData.count : contactsForSection.count
     }
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return String(keyCharacter[section])
+        return isSearchActive ? "" : String(keyCharacter[section])
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -111,6 +128,16 @@ extension TabelViewController: UITableViewDelegate, UITableViewDataSource {
         guard editingStyle == .delete else {return}
         guard let contact = getContact(for: indexPath) else {return}
         DataManager.instance.delContac(contact)
+    }
+}
+
+extension TabelViewController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        filterContent(byName: searchText)
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        view.endEditing(true)
     }
 }
 
