@@ -10,11 +10,11 @@ import UIKit
 
 final class DataManager {
     static let instance = DataManager()
+    private(set) var contacts: [ContactUser] = []
+    
     private init() {
         generateDate()
     }
-    
-    private(set) var contacts: [ContactUser] = []
     
     //MARK: - Private methods
     private func generateDate() {
@@ -32,6 +32,18 @@ final class DataManager {
                                     email: "ArehK@mail.ru", telephone: "+380978678958"))
     }
     
+    private func getIndex(of contact: ContactUser) -> Int? {
+        var indexOfContact: Int?
+        for (index,item) in contacts.enumerated() {
+            if item.id == contact.id {
+                indexOfContact = index
+                break
+            }
+        }
+        return indexOfContact
+    }
+    
+    //MARK: - Editing data methods
     func delContac(_ contact: ContactUser) {
         guard !contacts.isEmpty else {return}
         guard let index = getIndex(of: contact) else {return}
@@ -55,14 +67,4 @@ final class DataManager {
         NotificationCenter.default.post(name: .ContactEditing, object: nil)
     }
     
-    func getIndex(of contact: ContactUser) -> Int? {
-        var indexOfContact: Int?
-        for (index,item) in contacts.enumerated() {
-            if item.id == contact.id {
-                indexOfContact = index
-                break
-            }
-        }
-        return indexOfContact
-    }
 }

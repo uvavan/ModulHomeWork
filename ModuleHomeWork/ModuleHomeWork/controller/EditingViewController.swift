@@ -10,12 +10,13 @@ import UIKit
 
 class EditingViewController: UIViewController {
 
-    @IBOutlet weak var ibImageContact: UIImageView!
-    @IBOutlet weak var ibButtonSave: UIBarButtonItem!
-    @IBOutlet weak var ibNameTextField: UITextField!
-    @IBOutlet weak var ibEmailTextField: UITextField!
-    @IBOutlet weak var ibTelephoneTextField: UITextField!
-    @IBOutlet weak var ibSurnameTextField: UITextField!
+    @IBOutlet private weak var ibImageContact: UIImageView!
+    @IBOutlet private weak var ibButtonSave: UIBarButtonItem!
+    @IBOutlet private weak var ibNameTextField: UITextField!
+    @IBOutlet private weak var ibEmailTextField: UITextField!
+    @IBOutlet private weak var ibTelephoneTextField: UITextField!
+    @IBOutlet private weak var ibSurnameTextField: UITextField!
+    @IBOutlet private weak var ibConstrainHigth: NSLayoutConstraint!
     var contact: ContactUser?
     private var isAddContact = false
 
@@ -23,11 +24,31 @@ class EditingViewController: UIViewController {
         super.viewDidLoad()
         isAddContact = contact != nil ? true : false
         setupViewController()
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapRecognized(_:)))
-        ibImageContact.addGestureRecognizer(tapGesture)
+    }
+
+    private func setupViewController() {
+        if  isAddContact {
+            title = "Редактировать"
+            setTextFields()
+            ibButtonSave.title = "Изменить"
+        } else {
+            title = "Создать"
+            ibButtonSave.title = "Добавить"
+        }
+        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(selectRecognizerTap(_:)))
+        view.addGestureRecognizer(tapRecognizer)
     }
     
-    @objc private func tapRecognized(_ sender: UITapGestureRecognizer) {
+    @objc private func selectRecognizerTap(_ sender: UITapGestureRecognizer) {
+        let iconImagePoint = sender.location(in: ibImageContact)
+        if ibImageContact.point(inside: iconImagePoint, with: nil) {
+            tapInIconImage()
+        } else {
+            hideKeyboard()
+        }
+    }
+    
+    private func tapInIconImage() {
         let alertVC = UIAlertController(title: "Выберите источник", message: nil, preferredStyle: .actionSheet)
         let cameraAction = UIAlertAction(title: "Камера", style: .default) { _ in
         }
@@ -40,19 +61,6 @@ class EditingViewController: UIViewController {
         self.present(alertVC, animated: true, completion: nil)
     }
     
-    private func setupViewController() {
-        if  isAddContact {
-            title = "Редактировать"
-            setTextFields()
-            ibButtonSave.title = "Изменить"
-        } else {
-            title = "Создать"
-            ibButtonSave.title = "Добавить"
-        }
-        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
-        view.addGestureRecognizer(tapRecognizer)
-    }
-    
     private func setTextFields() {
         guard let contact = contact else {return}
         ibNameTextField.text = contact.name
@@ -61,7 +69,7 @@ class EditingViewController: UIViewController {
         ibEmailTextField.text = contact.email
     }
     
-    @IBAction func ibButtonSave(_ sender: Any) {
+    @IBAction private func ibButtonSave(_ sender: Any) {
         let newName = ibNameTextField.text ?? ""
         let newSurname = ibSurnameTextField.text ?? ""
         let newEmail = ibEmailTextField.text ?? ""
@@ -87,7 +95,7 @@ class EditingViewController: UIViewController {
         navigationController?.popViewController(animated: true)
     }
 
-    @objc private func hideKeyboard() {
+   private func hideKeyboard() {
         view.endEditing(true)
     }
 

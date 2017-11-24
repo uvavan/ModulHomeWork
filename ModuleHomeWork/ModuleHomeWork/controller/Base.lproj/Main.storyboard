@@ -181,8 +181,8 @@
                             <constraint firstItem="zTy-pe-9CM" firstAttribute="centerX" secondItem="xhw-MV-0aQ" secondAttribute="centerX" id="AHs-g8-Fc9"/>
                             <constraint firstItem="zZm-VX-0eO" firstAttribute="trailing" secondItem="LgI-6S-92f" secondAttribute="trailing" constant="10" id="DJl-eZ-qsn"/>
                             <constraint firstItem="zTy-pe-9CM" firstAttribute="top" secondItem="zZm-VX-0eO" secondAttribute="top" constant="10" id="DUi-JO-60Y"/>
+                            <constraint firstItem="LgI-6S-92f" firstAttribute="top" secondItem="zTy-pe-9CM" secondAttribute="bottom" constant="10" id="lHg-K5-Kia"/>
                             <constraint firstItem="LgI-6S-92f" firstAttribute="leading" secondItem="zZm-VX-0eO" secondAttribute="leading" constant="10" id="v7m-Tv-s2e"/>
-                            <constraint firstItem="LgI-6S-92f" firstAttribute="top" secondItem="zZm-VX-0eO" secondAttribute="top" constant="140" id="ve6-Qv-6cJ"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="zZm-VX-0eO"/>
                     </view>
@@ -195,6 +195,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="ibButtonSave" destination="Ay1-a6-BOl" id="75X-IY-edY"/>
+                        <outlet property="ibConstrainHigth" destination="89R-ef-F0m" id="hZ2-Ux-igW"/>
                         <outlet property="ibEmailTextField" destination="Vct-KD-ooc" id="9GB-Tc-FH8"/>
                         <outlet property="ibImageContact" destination="zTy-pe-9CM" id="spf-7y-zg7"/>
                         <outlet property="ibNameTextField" destination="5Dk-jB-m2g" id="ypc-Ik-t7h"/>
