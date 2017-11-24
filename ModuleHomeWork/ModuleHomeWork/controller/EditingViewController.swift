@@ -9,23 +9,38 @@
 import UIKit
 
 class EditingViewController: UIViewController {
-
+    
     @IBOutlet private weak var ibImageContact: UIImageView!
     @IBOutlet private weak var ibButtonSave: UIBarButtonItem!
     @IBOutlet private weak var ibNameTextField: UITextField!
     @IBOutlet private weak var ibEmailTextField: UITextField!
     @IBOutlet private weak var ibTelephoneTextField: UITextField!
     @IBOutlet private weak var ibSurnameTextField: UITextField!
-    @IBOutlet private weak var ibConstrainHigth: NSLayoutConstraint!
-    var contact: ContactUser?
     private var isAddContact = false
-
+    private var keyboardIsHidden = true
+    var contact: ContactUser?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         isAddContact = contact != nil ? true : false
         setupViewController()
     }
-
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        addAllObservers()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    private func addAllObservers() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: .UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: .UIKeyboardWillHide, object: nil)
+    }
+    
     private func setupViewController() {
         if  isAddContact {
             title = "Редактировать"
@@ -35,13 +50,17 @@ class EditingViewController: UIViewController {
             title = "Создать"
             ibButtonSave.title = "Добавить"
         }
+        ibNameTextField.delegate = self
+        ibSurnameTextField.delegate = self
+        ibEmailTextField.delegate = self
+        ibTelephoneTextField.delegate = self
         let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(selectRecognizerTap(_:)))
         view.addGestureRecognizer(tapRecognizer)
     }
     
     @objc private func selectRecognizerTap(_ sender: UITapGestureRecognizer) {
         let iconImagePoint = sender.location(in: ibImageContact)
-        if ibImageContact.point(inside: iconImagePoint, with: nil) {
+        if ibImageContact.point(inside: iconImagePoint, with: nil), keyboardIsHidden {
             tapInIconImage()
         } else {
             hideKeyboard()
@@ -75,11 +94,11 @@ class EditingViewController: UIViewController {
         let newEmail = ibEmailTextField.text ?? ""
         let newTel = ibTelephoneTextField.text ?? ""
         guard !newName.isEmpty, !newSurname.isEmpty else {
-                let alertVC = UIAlertController(title: "", message: "Введите имя и фамилию", preferredStyle: .alert)
-                let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-                alertVC.addAction(okAction)
-                self.present(alertVC, animated: true, completion: nil)
-                return
+            let alertVC = UIAlertController(title: "", message: "Введите имя и фамилию", preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+            alertVC.addAction(okAction)
+            self.present(alertVC, animated: true, completion: nil)
+            return
         }
         if isAddContact {
             contact?.name = newName
@@ -94,11 +113,11 @@ class EditingViewController: UIViewController {
         }
         navigationController?.popViewController(animated: true)
     }
-
-   private func hideKeyboard() {
+    
+    private func hideKeyboard() {
         view.endEditing(true)
     }
-
+    
 }
 
 // MARK: - UITextFieldDelegate
@@ -106,5 +125,16 @@ extension EditingViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         hideKeyboard()
         return true
+    }
+}
+
+//MARK: - Notification
+extension EditingViewController {
+    @objc private func keyboardWillShow(_ notification: Notification) {
+        keyboardIsHidden = false
+    }
+    
+    @objc private func keyboardWillHide(_ notification: Notification) {
+        keyboardIsHidden = true
     }
 }

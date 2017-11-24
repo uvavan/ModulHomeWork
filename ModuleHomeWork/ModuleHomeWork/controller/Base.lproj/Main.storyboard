@@ -195,7 +195,6 @@
                     </navigationItem>
                     <connections>
                         <outlet property="ibButtonSave" destination="Ay1-a6-BOl" id="75X-IY-edY"/>
-                        <outlet property="ibConstrainHigth" destination="89R-ef-F0m" id="hZ2-Ux-igW"/>
                         <outlet property="ibEmailTextField" destination="Vct-KD-ooc" id="9GB-Tc-FH8"/>
                         <outlet property="ibImageContact" destination="zTy-pe-9CM" id="spf-7y-zg7"/>
                         <outlet property="ibNameTextField" destination="5Dk-jB-m2g" id="ypc-Ik-t7h"/>
