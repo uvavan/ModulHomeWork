@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TabelViewController: UIViewController {
+class ContactsTabelViewController: UIViewController {
     
     @IBOutlet private weak var ibSearch: UISearchBar!
     @IBOutlet private weak var ibContactTableView: UITableView!
@@ -46,6 +46,16 @@ class TabelViewController: UIViewController {
     }
     
     private func setupDatasource() {
+        let name = ibSearch.text ?? ""
+        isSearchActive = !name.isEmpty
+        if isSearchActive {
+            filterContent(byName: name)
+        } else {
+            setupTabelContent()
+        }
+    }
+    
+    private func setupTabelContent() {
         let contacts = DataManager.instance.contacts
         datasource = [:]
         keyCharacter = []
@@ -61,16 +71,16 @@ class TabelViewController: UIViewController {
     }
     
     private func filterContent(byName name: String) {
-        let contacts = DataManager.instance.contacts
-        isSearchActive = !name.isEmpty
-        filteredData.removeAll()
-        for contact in contacts {
-            if contact.fullName.lowercased().contains(name.lowercased()) {
-                filteredData.append(contact)
+        if !name.isEmpty {
+            let contacts = DataManager.instance.contacts
+            filteredData.removeAll()
+            for contact in contacts {
+                if contact.fullName.lowercased().contains(name.lowercased()) {
+                    filteredData.append(contact)
+                }
             }
         }
         ibContactTableView.reloadData()
-        //ibContactTableView.reloadSections(IndexSet(integer: 0), with: .none)
     }
     
     @IBAction private func buttonPressAddContact(_ sender: Any) {
@@ -86,7 +96,7 @@ class TabelViewController: UIViewController {
 }
 
 // MARK: - Table view datasource
-extension TabelViewController: UITableViewDelegate, UITableViewDataSource {
+extension ContactsTabelViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return isSearchActive ? 1 : keyCharacter.count
@@ -110,6 +120,7 @@ extension TabelViewController: UITableViewDelegate, UITableViewDataSource {
         let contactsForSection = datasource[key] ?? []
         return  isSearchActive ? filteredData.count : contactsForSection.count
     }
+    
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return isSearchActive ? "" : String(keyCharacter[section])
     }
@@ -127,13 +138,14 @@ extension TabelViewController: UITableViewDelegate, UITableViewDataSource {
                    forRowAt indexPath: IndexPath) {
         guard editingStyle == .delete else {return}
         guard let contact = getContact(for: indexPath) else {return}
-        DataManager.instance.delContac(contact)
+        DataManager.instance.deleteContac(contact)
     }
 }
 
-extension TabelViewController: UISearchBarDelegate {
+extension ContactsTabelViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        filterContent(byName: searchText)
+        //filterContent(byName: searchText)
+        setupDatasource()
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
@@ -141,7 +153,7 @@ extension TabelViewController: UISearchBarDelegate {
     }
 }
 
-extension TabelViewController {
+extension ContactsTabelViewController {
     @objc private func delContact () {
         setupDatasource()
     }

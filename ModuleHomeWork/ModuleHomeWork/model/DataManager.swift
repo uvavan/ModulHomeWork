@@ -44,7 +44,7 @@ final class DataManager {
     }
     
     //MARK: - Editing data methods
-    func delContac(_ contact: ContactUser) {
+    func deleteContac(_ contact: ContactUser) {
         guard !contacts.isEmpty else {return}
         guard let index = getIndex(of: contact) else {return}
         contacts.remove(at: index)

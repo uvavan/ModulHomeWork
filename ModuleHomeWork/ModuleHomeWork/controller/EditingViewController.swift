@@ -16,13 +16,14 @@ class EditingViewController: UIViewController {
     @IBOutlet private weak var ibEmailTextField: UITextField!
     @IBOutlet private weak var ibTelephoneTextField: UITextField!
     @IBOutlet private weak var ibSurnameTextField: UITextField!
-    private var isAddContact = false
+    private var isAddContact: Bool {
+        return contact != nil ? true : false
+    }
     private var keyboardIsHidden = true
     var contact: ContactUser?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        isAddContact = contact != nil ? true : false
         setupViewController()
     }
     
@@ -88,7 +89,7 @@ class EditingViewController: UIViewController {
         ibEmailTextField.text = contact.email
     }
     
-    @IBAction private func ibButtonSave(_ sender: Any) {
+    @IBAction private func ibButtonSavePress(_ sender: Any) {
         let newName = ibNameTextField.text ?? ""
         let newSurname = ibSurnameTextField.text ?? ""
         let newEmail = ibEmailTextField.text ?? ""

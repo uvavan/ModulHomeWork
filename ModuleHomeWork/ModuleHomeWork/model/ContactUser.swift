@@ -8,17 +8,19 @@
 
 import UIKit
 
-class ContactUser {
+struct ContactUser {
     private static var objectCount = 0
     var id: Int
-    var name: String = ""
-    var surname: String = ""
-    var email: String = ""
-    var telephone: String = ""
-    var fullName: String = ""
-    var icon: UIImage! = nil
+    var name: String
+    var surname: String
+    var email: String
+    var telephone: String
+    var fullName: String {
+       return "\(self.name) \(self.surname)"
+    }
+    var icon: UIImage?
     
-    init(name: String, surname: String, email: String, telephone: String, _ icon: UIImage! = nil) {
+    init(name: String, surname: String, email: String, telephone: String, _ icon: UIImage? = nil) {
         ContactUser.objectCount += 1
         self.id = ContactUser.objectCount
         self.name = name
@@ -26,6 +28,5 @@ class ContactUser {
         self.email = email
         self.telephone = telephone
         self.icon = icon
-        self.fullName = "\(self.name) \(self.surname)"
     }
 }
