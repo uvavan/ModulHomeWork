@@ -17,7 +17,7 @@ class EditingViewController: UIViewController {
     @IBOutlet private weak var ibTelephoneTextField: UITextField!
     @IBOutlet private weak var ibSurnameTextField: UITextField!
     private var isAddContact: Bool {
-        return contact != nil ? true : false
+        return contact != nil
     }
     private var keyboardIsHidden = true
     var contact: ContactUser?
