@@ -32,7 +32,7 @@ class ContactsTabelViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(editingContact), name: .ContactEditing, object: nil)
     }
     
-    private func setupTable(){
+    private func setupTable() {
         ibContactTableView.delegate = self
         ibContactTableView.dataSource = self
         ibContactTableView.keyboardDismissMode = .onDrag

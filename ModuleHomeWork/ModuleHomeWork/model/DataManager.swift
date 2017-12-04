@@ -34,11 +34,9 @@ final class DataManager {
     
     private func getIndex(of contact: ContactUser) -> Int? {
         var indexOfContact: Int?
-        for (index,item) in contacts.enumerated() {
-            if item.id == contact.id {
+        for (index, item) in contacts.enumerated() where item.id == contact.id {
                 indexOfContact = index
                 break
-            }
         }
         return indexOfContact
     }
