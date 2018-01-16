@@ -94,7 +94,7 @@ class EditingViewController: UIViewController {
         let newSurname = ibSurnameTextField.text ?? ""
         let newEmail = ibEmailTextField.text ?? ""
         let newTel = ibTelephoneTextField.text ?? ""
-        guard !newName.isEmpty, !newSurname.isEmpty else {
+        guard !newName.isEmpty, !newTel.isEmpty else {
             let alertVC = UIAlertController(title: "", message: "Введите имя и фамилию", preferredStyle: .alert)
             let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
             alertVC.addAction(okAction)
@@ -129,7 +129,7 @@ extension EditingViewController: UITextFieldDelegate {
     }
 }
 
-//MARK: - Notification
+// MARK: - Notification
 extension EditingViewController {
     @objc private func keyboardWillShow(_ notification: Notification) {
         keyboardIsHidden = false

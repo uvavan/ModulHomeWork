@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		842944BF200DE87D0059190C /* ContactUserMO+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842944BD200DE87D0059190C /* ContactUserMO+CoreDataClass.swift */; };
+		842944C0200DE87E0059190C /* ContactUserMO+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842944BE200DE87D0059190C /* ContactUserMO+CoreDataProperties.swift */; };
+		842944E3200DE9330059190C /* CoreDataModuleHomeWork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842944E2200DE9330059190C /* CoreDataModuleHomeWork.swift */; };
+		844834E7200CEA4400E8144D /* ModuleHomeWork.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 844834E5200CEA4400E8144D /* ModuleHomeWork.xcdatamodeld */; };
 		8457258D1FBC34CB00C98C74 /* EditingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8457258C1FBC34CB00C98C74 /* EditingViewController.swift */; };
 		845725941FBC357E00C98C74 /* ContactTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845725921FBC357E00C98C74 /* ContactTableViewCell.swift */; };
 		845725951FBC357E00C98C74 /* ContactTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 845725931FBC357E00C98C74 /* ContactTableViewCell.xib */; };
@@ -24,6 +28,10 @@
 /* Begin PBXFileReference section */
 		29AC307458FDAD758F4D730A /* Pods_ModuleHomeWork.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ModuleHomeWork.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		64A915C8DFCF564795FA7CFA /* Pods-ModuleHomeWork.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ModuleHomeWork.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ModuleHomeWork/Pods-ModuleHomeWork.debug.xcconfig"; sourceTree = "<group>"; };
+		842944BD200DE87D0059190C /* ContactUserMO+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ContactUserMO+CoreDataClass.swift"; sourceTree = "<group>"; };
+		842944BE200DE87D0059190C /* ContactUserMO+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ContactUserMO+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		842944E2200DE9330059190C /* CoreDataModuleHomeWork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataModuleHomeWork.swift; sourceTree = "<group>"; };
+		844834E6200CEA4400E8144D /* CoreDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreDataModel.xcdatamodel; sourceTree = "<group>"; };
 		8457258C1FBC34CB00C98C74 /* EditingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditingViewController.swift; sourceTree = "<group>"; };
 		845725921FBC357E00C98C74 /* ContactTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactTableViewCell.swift; sourceTree = "<group>"; };
 		845725931FBC357E00C98C74 /* ContactTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContactTableViewCell.xib; sourceTree = "<group>"; };
@@ -61,11 +69,39 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		842944BA200DE6770059190C /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				845725981FBC3C6500C98C74 /* ContactUser.swift */,
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
+		842944BB200DE6D80059190C /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				842944E2200DE9330059190C /* CoreDataModuleHomeWork.swift */,
+				842944BC200DE84F0059190C /* Entities */,
+				844834E5200CEA4400E8144D /* ModuleHomeWork.xcdatamodeld */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
+		842944BC200DE84F0059190C /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				842944BD200DE87D0059190C /* ContactUserMO+CoreDataClass.swift */,
+				842944BE200DE87D0059190C /* ContactUserMO+CoreDataProperties.swift */,
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
 		845725871FBC308D00C98C74 /* model */ = {
 			isa = PBXGroup;
 			children = (
 				845725961FBC3A6000C98C74 /* DataManager.swift */,
-				845725981FBC3C6500C98C74 /* ContactUser.swift */,
+				842944BB200DE6D80059190C /* CoreData */,
+				842944BA200DE6770059190C /* Entities */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -292,8 +328,12 @@
 				845725991FBC3C6500C98C74 /* ContactUser.swift in Sources */,
 				845725971FBC3A6000C98C74 /* DataManager.swift in Sources */,
 				846483601FBC2483008D41E5 /* ContactsTabelViewController.swift in Sources */,
+				842944BF200DE87D0059190C /* ContactUserMO+CoreDataClass.swift in Sources */,
 				84DB2AD01FC32EA2001C4F8E /* Notification+Extension.swift in Sources */,
 				8457258D1FBC34CB00C98C74 /* EditingViewController.swift in Sources */,
+				842944C0200DE87E0059190C /* ContactUserMO+CoreDataProperties.swift in Sources */,
+				842944E3200DE9330059190C /* CoreDataModuleHomeWork.swift in Sources */,
+				844834E7200CEA4400E8144D /* ModuleHomeWork.xcdatamodeld in Sources */,
 				8464835E1FBC2483008D41E5 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -481,6 +521,20 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		844834E5200CEA4400E8144D /* ModuleHomeWork.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				844834E6200CEA4400E8144D /* CoreDataModel.xcdatamodel */,
+			);
+			currentVersion = 844834E6200CEA4400E8144D /* CoreDataModel.xcdatamodel */;
+			path = ModuleHomeWork.xcdatamodeld;
+			sourceTree = "<group>";
+			usesTabs = 0;
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 846483521FBC2483008D41E5 /* Project object */;
 }

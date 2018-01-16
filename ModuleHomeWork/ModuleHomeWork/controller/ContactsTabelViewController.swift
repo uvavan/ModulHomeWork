@@ -21,6 +21,9 @@ class ContactsTabelViewController: UIViewController {
         super.viewDidLoad()
         self.title = "Контакты"
         ibSearch.delegate = self
+        // TODO: - uncomment for generating contacts and adding them to CoreData
+       // DataManager.instance.generateDate()
+        DataManager.instance.getContactsList()
         setupDatasource()
         setupTable()
         addNotification()
@@ -30,6 +33,7 @@ class ContactsTabelViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(delContact), name: .ContactDeleted, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(addContact), name: .ContactAdd, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(editingContact), name: .ContactEditing, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(setupDatasource), name: .ContactsListReload, object: nil)
     }
     
     private func setupTable() {
@@ -45,7 +49,7 @@ class ContactsTabelViewController: UIViewController {
         return isSearchActive ? filteredData[indexPath.row] : contactsForSection?[indexPath.row]
     }
     
-    private func setupDatasource() {
+    @objc private func setupDatasource() {
         let name = ibSearch.text ?? ""
         isSearchActive = !name.isEmpty
         if isSearchActive {
